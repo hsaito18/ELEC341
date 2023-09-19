@@ -19,10 +19,12 @@ time = linspace(0, 1, 1000);
 [v, t] = impulse(G, time);
 
 figure(1); hold on; grid on;
-plot(t*1000, v(:,1), 'b-',  'Linewidth', 1);
+% plot(t*1000, v(:,1), 'b-',  'Linewidth', 1);
 
-min_p = -340;
-G_filter = G * s*min_p*-1/(s - min_p);
+min_p = -1111;
+G_filter = G * (s * (-1)* min_p) /(s - min_p);
 
 [v2, t2] = step(G_filter, time);
-plot(t2*1000, v2, 'r.', 'Linewidth', 3);
+
+diffs = abs(v2 - yt);
+max(diffs) / 125

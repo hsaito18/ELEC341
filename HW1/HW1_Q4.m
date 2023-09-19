@@ -10,7 +10,7 @@ a1DSPlot(19177062, 1)
 
 sigma = Q3.sigma;
 
-Kdc = 3.6125;
+Kdc = 3.6065;
 
 G = Kdc * (25 * sigma^2)/(s^2 - 2*sigma*s + 25*sigma^2);
 
@@ -22,10 +22,12 @@ figure(1); hold on; grid on;
 plot(t*1000, v(:,1), 'b-',  'Linewidth', 1);
 
 min_p = -91.5;
-G_filter = G * s*91.5/(s - min_p);
+G_filter = G *s* -1*min_p/(s - min_p);
+filt_deriv = s * -1*min_p/(s-min_p);
 
-[v2, t2] = step(G_filter, time);
+[v2, t2] = step(filt_deriv * G, time);
 plot(t2*1000, v2, 'r.', 'Linewidth', 3);
+
 
 Q4.p = min_p;
 Q4.err = 38;
