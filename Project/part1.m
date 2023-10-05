@@ -16,8 +16,8 @@ s = tf('s');
 % Parameters
 FV = 15.9; % (V)
 Tr = 0.745; % (ms)
-Tp = 1.4; % (ms)
-Ts = 3.69; % (ms)
+Tp = 1.65; % (ms)
+Ts = 3.00; % (ms)
 peak = 19.9; % (V)
 
 pos = abs(peak - FV)/FV * 100;
