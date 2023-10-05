@@ -23,11 +23,21 @@ H1 = 100/(s+F_sn);
 H2 = 1000/(s+G_sn);
 
 % Simplifications
+% For Q1.G11
 G7 = G2*H1*G4;
 G8 = (G3+G7)*G5*H2;
 tf1 = G2*G1/(G1*G8 + 1);
 
+% For Q1.G12
+G9 = G5*H2*-1*G1;
+G10 = G9/(1-G3*G9);
+G13 = G4*G10*G2;
+G14 = -1*G13/(1-G13*H1);
+tf2 = G14;
+
+% For Q1.G21
+
 Q1.G11 = tf1;
-Q1.G12 = tf1;
+Q1.G12 = tf2;
 Q1.G21 = tf1;
 Q1.G22 = tf1;
