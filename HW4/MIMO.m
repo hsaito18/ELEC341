@@ -14,7 +14,7 @@ G4 = 10/(s+D_sn);
 G5 = 1/(s+E_sn);
 
 H1 = 100/(s+F_sn);
-H2 = 1000/(s+G_sn);
+H2 = 500/(s+G_sn);
 
 % Simplifications
 % For Q1.G11

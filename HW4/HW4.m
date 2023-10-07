@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%
 clear all; clc;
 addpath 'C:\Users\hsait\Documents\Projects\ELEC341'
-save_student_numbesr
+save_student_number
 MIMO;
 FanMotor;
 a4Submit
