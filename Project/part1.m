@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%
 
 clear all; clc;
-addpath 'C:\Users\hsait\Documents\Projects\ELEC341'
+addpath '..'
 save_student_number
 
 s = tf('s');
@@ -35,12 +35,27 @@ Kdc = FV;
 
 G = Kdc*wn^2/(s^2+2*zeta*wn*s + wn^2);
 
+% Sensor Block Diagram Calculations
+G1 = A_sn*7/(s + B_sn*800);
+G2 = C_sn*8/(s + D_sn*700);
+G3 = 10^5/(s+E_sn*600);
+G4 = F_sn*50/(s+G_sn*500);
+H1 = 4/(s+H_sn*5);
+
+G5 = 1+G3*G4*H1;
+Hs = (G1*G2 + G2*G3/G5)/(1+G2*G3*H1/G5);
+[zeroes, gain] = zero(Hs);
+Hs = Hs/gain;
+
 Q1.Tr = Tr;
 Q1.Tp = Tp;
 Q1.Ts = Ts;
 Q1.Pos = pos;
 
 Q2.G = G;
+
+Q3.Kdc = gain;
+Q3.D = Hs;
 
 p1Submit;
 
