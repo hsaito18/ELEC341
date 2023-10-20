@@ -23,7 +23,7 @@ peak = 19.9; % (V)
 
 pos = abs(peak - FV)/FV * 100;
 
-zeta = sqrt((log(pos/100)^2)/(pi^2+log(pos/100)^2));
+zeta = sqrt((log(pos/100)^2-)/(pi^2+log(pos/100)^2));
 beta = sqrt(1-zeta^2);
 
 wnp = pi/(beta*Tp);
@@ -100,12 +100,10 @@ c1 = Kl * alpha;
 c2 = Kl*beta*Na*Nf;
 c3 = Kl*charlie;
 
-A = [[-Rw/Lw, -Km/Lw, 0, 0];[Km/Jt, a1/J1, a2/J1, a3/J1]; [0, b1, b2, b3]; [0, c1, c2, c3]];
-
-B = [1/Lw, 0; 0]%% aaaa
+A = [[-Rw/Lw, -Km/L, 0, 0],[Km/Jt, a1/J1, a2/J1, a3]];
 
 
-% p1Submit;
+p1Submit;
 
 
 
