@@ -68,51 +68,42 @@ Jr = G_sn/15/100/100/1000; % kg-m^2
 Js = H_sn/5/100/100/1000; % kg-m^2
 Ms = A_sn/4/1000; % kg
 Bs = B_sn/3; % Ns/m
-Na = 3/100; % m/deg
+Na = 3/100/(2*pi); % m/rad
 Jf = C_sn/3/100/100/1000; % kg-m^2
 Bf = D_sn/1000; % Nms
-Nf = 10 * 100; % deg/m
+Nf = 10 * 100*pi/180; % rad/m
 Bt = E_sn/1000; % Nms
 Kt = F_sn*30/1000; % Nm
-Nt = 0.1; % m/deg sinx = x approx???
+Nt = 0.1; % m/rad sinx = x approx?
 Bl = G_sn/5; % Ns/m
 Kl = H_sn*15; % N/m
 
-Bt_ = Na^2*Nf^2*Bt;
 
 J1 = Jr + Js;
 
 M1 = Mm + Ms;
 
+Mt = 1e-9;
+
 Jt = J1+Na^2*M1 + Na^2*Nf^2*Jf;
 
-alpha = 1/(Nt*Bl + Bt/Nt);
-beta = Bt/(Nt*Bl + Bt/Nt);
-charlie = -Nt/(Nt*Bl + Bt/Nt);
+a1 = -Bm - Na^2*Bs - Na^2*Nf^2*(Bf + Bt);
+a2 = -Bl - Bt/Nt^2;
 
-a1 = -Bm-Na^2*Bs-Na^2*Nf^2*Bf+Na^2*Nf^2*Bt*Nf*Na/Nt*(beta-1);
-a2 = -1 + Bt*Na^2*Nf^2*alpha/Nt;
-a3 = Bt*Na^2*Nf^2*charlie/Nt;
+A = [-Rw/Lw, -Km/Lw, 0, 0 ,0;
+     Km/Jt, a1/Jt, Nf*Na/Jt, 0, Nf*Na*Bt/Jt/Nt;
+     0, -Kt*Na*Nf, 0, 0, Kt/Nt;
+     0, 0, 0, 0, -Kl;
+     0, Bt*Na*Nf/(Mt*Nt), -1/(Mt*Nt), 1/Mt, a2/Mt];
 
-b1 = Kt*Na*Nf*(1-beta/Nt);
-b2 = -Kt/Nt*alpha;
-b3 = -Kt/Nt*charlie;
+B = transpose([1/Lw, 0, 0, 0, 0]);
 
-c1 = Kl * alpha;
-c2 = Kl*beta*Na*Nf;
-c3 = Kl*charlie;
+C = [Km, 0, 0, 0, 0;
+     0, Na/s, 0, 0, 0;
+     0, Na*Nf/s, 0, 0, 0;
+     0, 0, 0, -1, Bt];
 
-d1 = ((1-beta/Nt)*Bt_*Na*Nf)/Nt;
-d2 = (1-Bt_/Nt*alpha)/Nt;
-d3 = -Bt_/Nt*charlie/Nt;
-
-A = [-Rw/Lw, -Km/Lw, 0, 0;Km/Jt, a1/J1, a2/J1, a3/J1; 0, b1, b2, b3; 0, c1, c2, c3];
-
-B = [1/Lw;0;0;0];
-
-C = [Km,0,0,0; 0,Na/s,0,0;0,Na*Nf/s,0,0;0,d1,d2,d3];
-
-D = [0;0;0;0];
+D = transpose([0,0,0,0]);
 
 I = eye(size(A));
 
@@ -123,7 +114,12 @@ M = C*phi*B + D;
 Q4.G = M(1,1);
 
 Q5.G = M(2,1);
-p1Submit;
+
+Q6.G = M(3) * 180/pi;
+
+Q7.G = M(4);
+
+% p1Submit;
 
 
 
