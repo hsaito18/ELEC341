@@ -87,21 +87,34 @@ Mt = 1e-9;
 
 Jt = J1+Na^2*M1 + Na^2*Nf^2*Jf;
 
-a1 = -Bm - Na^2*Bs - Na^2*Nf^2*(Bf + Bt);
+k1 = -Bm - Na^2*Bs - Na^2*Nf^2*(Bf + Bt);
 a2 = -Bl - Bt/Nt^2;
 
-A = [-Rw/Lw, -Km/Lw, 0, 0 ,0;
-     Km/Jt, a1/Jt, Nf*Na/Jt, 0, Nf*Na*Bt/Jt/Nt;
-     0, -Kt*Na*Nf, 0, 0, Kt/Nt;
-     0, 0, 0, 0, -Kl;
-     0, Bt*Na*Nf/(Mt*Nt), -1/(Mt*Nt), 1/Mt, a2/Mt];
+beta = Bl + Bt/Nt^2;
+beta1 = -Kl/beta;
+beta2 = -1/(Nt*beta);
+beta3 = Bt*Na*Nf/(Nt*beta);
 
-B = transpose([1/Lw, 0, 0, 0, 0]);
+b1 = Km/Jt;
+b2 = (k1 + Nf*Na*Bt/Nt*beta3)/Jt;
+b3 = (Na*Nf + Nf*Na*Bt/Nt*beta2)/Jt;
+b4 = Nf*Na*Bt/Nt*beta1/Jt;
 
-C = [Km, 0, 0, 0, 0;
-     0, Na/s, 0, 0, 0;
-     0, Na*Nf/s, 0, 0, 0;
-     0, 0, 0, -1, Bt];
+c2 = Kt*(beta3/Nt - Na*Nf);
+c3 = Kt/Nt*beta2;
+c4 = Kt/Nt*beta1;
+
+A = [-Rw/Lw, -Km/Lw, 0, 0;
+     b1, b2, b3, b4;
+     0, c2, c3, c4;
+     0, beta3, beta2, beta1];
+
+B = transpose([1/Lw, 0, 0, 0]);
+
+C = [Km, 0, 0, 0;
+     0, Na/s, 0, 0;
+     0, Na*Nf/s, 0, 0;
+     0, 0, 0, Kl+s*Bl];
 
 D = transpose([0,0,0,0]);
 
