@@ -210,7 +210,7 @@ phi = inv((s*I - A));
 M = C*phi*B + D;
 
 testTF = V(1)*M(1)/s*Na;
-vt_ = V(2)*M(1);
+vt = V(2)*M(1)
 
 Q4.G = M(1);
 
@@ -221,9 +221,7 @@ Q5.G = testTF;
 Q6.G = testTF*Nf*180/pi;
 
 % Q7.G = M(4)/3;
-Q7.G = ((Bt_+Kt_/s)*V(1)*M(1) + (-Bt_-Kt_/s)*vt_)/(Na*Nt*Nf*3);
-
-Q8.GH = Q2.G*Q6.G/Nf/Na*Q3.Kdc*Q3.D;
+Q7.G = (Bt_+Kt_/s)*testTf + (-Bt_-Kt_/s)*V(2)
 
 p1Submit;
 
