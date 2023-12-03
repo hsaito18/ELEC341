@@ -70,12 +70,6 @@ end % for
 Q4.C = [cs0, cs(1), cs(2), cs(3)];
 Q4.Nf = Nws;
 
-Nt = Nt + Nws + 0.5;
-flt = CF/(Nt*s + CF);
-H2 = Kh*Hs*flt;
-
-flt2 = CF/((Nws+0.5)*s + CF);
-
 Nd = 0.5 + Nws;
 invNd = 1/Nd;
 p = -1*invNd*CF;
