@@ -225,7 +225,7 @@ Q7.G = ((Bt_+Kt_/s)*V(1)*M(1) + (-Bt_-Kt_/s)*vt_)/(Na*Nt*Nf*3);
 
 Q8.GH = Q2.G*Q6.G/Nf/Na*Q3.Kdc*Q3.D;
 
-p1Submit;
+% p1Submit;
 
 
 
