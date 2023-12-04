@@ -90,33 +90,9 @@ Q5.wxo = wxo;
 
 zero = -wxo;
 
-z1 = zero;
-z2 = zero;
-
 pdy = K0 * Dp * Gp * H;
 
-center = zero+0.1;
-
-% no real separation.
-
-initRadius = abs(center);
-r = initRadius;
-
-% angles = linspace(0,90,91);
-% pms = ones(91);
-% for c = 1:91
-%     pms(c) = abs(anglePM(deg2rad(angles(c)), r, pdy));
-% end
-
-angle = deg2rad(58);
-
-r = r-0.8;
- 
-angle1 = pi - angle;
-angle2 = pi + angle;
-
-oz1 = r.*exp(angle1*1i);
-oz2 = conj(oz1);
+[oz1, oz2, PM] = optimizeDoubleZero(zero, pdy, 0.1, deg2rad(1));
 
 Dz = (s-oz1)*(s-oz2)/(oz1*oz2);
  
@@ -126,7 +102,7 @@ K = 6.419;
 Gol = K * D * Gp * H;
  
 Q6.z = [oz2, oz1];
-Q6.PM = 114.5962;
+Q6.PM = PM; % 114.5962
 Q6.D = D;
 Q6.K = K;
 
