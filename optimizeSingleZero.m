@@ -38,6 +38,6 @@ function pm = getPM(zero,pdy)
     s = tf('s');
     Dz = (s-zero)/(-zero);
     openloop = Dz * pdy;
-    [aaaa,bbb] = margin(openloop);
-    pm = abs(bbb);
+    [bbb,~] = phsMargin(openloop);
+    pm = bbb;
 end

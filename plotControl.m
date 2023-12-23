@@ -6,7 +6,6 @@ function b = plotControl(K,Kp,Kd,Ki,p,Gp,H, factor)
     s = tf('s');
     PID = K*(Kp + Ki*1/s + Kd*(-p*s)/(s-p))
     Gcl = feedback(PID*Gp, H)*factor;
-    G = Gcl;
-    plotTF;
+    plotTF(Gcl, 1, 1);
     b = 1;
 end
